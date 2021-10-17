@@ -1,8 +1,9 @@
-<h3 align="center">
+<h2 align="center">
  AutoClick
-</h3>
+</h2>
 
-<h1> Tecnologias </h1>
+<h3> Tecnologias </h3>
+
 - Python
 - PyQt5
 - PyAutoGui
