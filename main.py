@@ -1,3 +1,5 @@
+from functions.clickCmd import ClickCmd
+from functions.keyCmd import KeyCmd
 from interface.main_window import *
 from pynput.mouse import Listener
 import win32gui
@@ -70,20 +72,24 @@ def main(ui):
     def runMode():
         allCommands =[]
 
-        for x in range(ui.events):
-            currentCommand = Command()
-            currentCommand.setId(ui.tableWidget.item(x, 0).text())
-            currentCommand.setAction(ui.tableWidget.item(x, 1).text())
-
-            if ui.tableWidget.item(x, 1).text() == "Click":
-                currentCommand.setxAxis(ui.tableWidget.item(x, 2).text())
-                currentCommand.setyAxis(ui.tableWidget.item(x, 3).text())
-            elif ui.tableWidget.item(x, 1).text() == "Key":
-                currentCommand.setKey(ui.tableWidget.item(x, 2).text())
-
-            currentCommand.setDelay(ui.tableWidget.item(x, 4).text())
-            currentCommand.setRepeat(ui.tableWidget.item(x, 5).text())
-            allCommands.append(currentCommand)
+        for index in range(ui.events):
+            if "Click" in ui.tableWidget.item(index, 1).text():
+                currentCommand = ClickCmd()
+                currentCommand.setxAxis(ui.tableWidget.item(index, 2).text())
+                currentCommand.setyAxis(ui.tableWidget.item(index, 3).text())
+                currentCommand.setId(ui.tableWidget.item(index, 0).text())
+                currentCommand.setAction(ui.tableWidget.item(index, 1).text())
+                currentCommand.setDelay(ui.tableWidget.item(index, 4).text())
+                currentCommand.setRepeat(ui.tableWidget.item(index, 5).text())
+                allCommands.append(currentCommand)
+            elif ui.tableWidget.item(index, 1).text() == "Key":
+                currentCommand = KeyCmd()
+                currentCommand.setKey(ui.tableWidget.item(index, 2).text())
+                currentCommand.setId(ui.tableWidget.item(index, 0).text())
+                currentCommand.setAction(ui.tableWidget.item(index, 1).text())
+                currentCommand.setDelay(ui.tableWidget.item(index, 4).text())
+                currentCommand.setRepeat(ui.tableWidget.item(index, 5).text())
+                allCommands.append(currentCommand)
 
         ui.thread = RunThread()
         ui.thread.setCommand(allCommands)
@@ -150,7 +156,7 @@ def main(ui):
 
     def addClicked():
         ui.tableWidget.setItem(ui.events,0,QTableWidgetItem(str(ui.events)))
-        ui.tableWidget.setItem(ui.events,1,QTableWidgetItem("Click"))
+        ui.tableWidget.setItem(ui.events,1,QTableWidgetItem(ui.comboBoxActionClick.currentText()))
         ui.tableWidget.setItem(ui.events,2,QTableWidgetItem(str(ui.aX1.text()+" - "+str(ui.aX2.text()))))
         ui.tableWidget.setItem(ui.events,3,QTableWidgetItem(str(ui.aY1.text()+" - "+str(ui.aY2.text()))))
         ui.tableWidget.setItem(ui.events,4,QTableWidgetItem(str(ui.TimeI.text()+" - "+str(ui.TimeE.text()))))

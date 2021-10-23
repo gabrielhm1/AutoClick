@@ -28,6 +28,7 @@ class RunThread(QThread):
                 time.sleep(1)
                 if self.threadActive == False:
                     break
+
             print("CLICK",clickX ,delay, repeatTimes , sep =" ")
             pg.moveTo(clickX, clickY, duration=random.uniform(0.1, 1.2))
             pg.click(clickX, clickY)
@@ -41,8 +42,9 @@ class RunThread(QThread):
                 time.sleep(1)
                 if self.threadActive == False:
                     break
-            print("KEY", currentCommand.getKey() , delay , repeatTimes, sep = " ")
-            pg.press(currentCommand.getKey())
+                print("KEY", currentCommand.getKey() , delay , repeatTimes, sep = " ")
+                pg.press(currentCommand.getKey())
+
 
 
     def run(self):
@@ -51,7 +53,7 @@ class RunThread(QThread):
         self.threadActive = True
         while self.threadActive:
             for currentCommand in self.allCommands:
-                if currentCommand.getAction() == "Click":
-                    self.clickMode(currentCommand)
-                elif currentCommand.getAction() == "Key":
+                if currentCommand.getAction() == "Key":
                     self.keyMode(currentCommand)
+                else:
+                    self.clickMode(currentCommand)

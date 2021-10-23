@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.groupBox_2)
         self.pushButton_2.setGeometry(QtCore.QRect(120, 100, 75, 23))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.clickType = ["Right Click", "Left Click", "Right Double Click","Left Double Click"]
+        self.clickType = ["Left Click", "Right Click", "Left Double Click","Right Double Click"]
         self.comboBoxActionClick = QtWidgets.QComboBox(self.groupBox_2)
         self.comboBoxActionClick.setGeometry(QtCore.QRect(70, 9, 120, 21))
         self.comboBoxActionClick.addItems(self.clickType)
